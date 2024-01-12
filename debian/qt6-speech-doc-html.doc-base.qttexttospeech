@@ -1,0 +1,9 @@
+Document: qt6-speech-manual
+Title: Qt 6 Speech
+Author: The Qt Company Ltd
+Abstract: This is the HTML documentation for Qt 6 Speech
+Section: Programming/C++
+
+Format: HTML
+Index: /usr/share/doc/qt6-speech-doc-html/html/qttexttospeech/qttexttospeech-index.html
+Files: /usr/share/doc/qt6-speech-doc-html/html/qttexttospeech/*.html
