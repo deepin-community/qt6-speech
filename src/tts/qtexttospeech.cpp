@@ -1,5 +1,5 @@
 // Copyright (C) 2015 The Qt Company Ltd.
-// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only
+// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
 
 
 #include "qtexttospeech.h"
@@ -672,7 +672,7 @@ QTextToSpeech::State QTextToSpeech::state() const
 */
 
 /*!
-    \qmlsignal void TextToSpeech::errorOccured(enumeration reason, string errorString)
+    \qmlsignal void TextToSpeech::errorOccurred(enumeration reason, string errorString)
 
     This signal is emitted after an error occurred and the \l state has been set to
     \c TextToSpeech.Error. The \a reason parameter specifies the type of error,
@@ -826,11 +826,18 @@ qsizetype QTextToSpeech::enqueue(const QString &utterance)
     if (!d->m_engine || utterance.isEmpty())
         return -1;
 
-    if (d->m_engine->state() == QTextToSpeech::Speaking) {
-        d->m_pendingUtterances.enqueue(utterance);
-    } else {
+    switch (d->m_engine->state()) {
+    case QTextToSpeech::Error:
+        return -1;
+    case QTextToSpeech::Ready:
         emit aboutToSynthesize(0);
         d->m_engine->say(utterance);
+        break;
+    case QTextToSpeech::Speaking:
+    case QTextToSpeech::Synthesizing:
+    case QTextToSpeech::Paused:
+        d->m_pendingUtterances.enqueue(utterance);
+        break;
     }
 
     return d->m_utteranceCounter++;

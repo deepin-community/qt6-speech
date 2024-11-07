@@ -11,6 +11,7 @@ qt_internal_add_module(TextToSpeech
         qvoice.cpp qvoice.h qvoice_p.h
     DEFINES
         QTEXTTOSPEECH_LIBRARY
+        QT_NO_CONTEXTLESS_CONNECT
     LIBRARIES
         Qt::CorePrivate
     PUBLIC_LIBRARIES
@@ -18,6 +19,7 @@ qt_internal_add_module(TextToSpeech
         Qt::Multimedia
     PRIVATE_MODULE_INTERFACE
         Qt::CorePrivate
+    NO_GENERATE_CPP_EXPORTS
 )
 
 
