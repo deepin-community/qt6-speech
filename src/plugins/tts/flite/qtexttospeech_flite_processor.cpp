@@ -1,5 +1,5 @@
 // Copyright (C) 2022 The Qt Company Ltd.
-// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only
+// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only
 
 #include "qtexttospeech_flite_processor.h"
 #include "qtexttospeech_flite_plugin.h"
@@ -278,7 +278,7 @@ QStringList QTextToSpeechProcessorFlite::fliteAvailableVoices(const QString &lib
         ldPaths.removeDuplicates();
     }
 
-    const QString libPattern = ("lib"_L1 + libPrefix).arg(langCode).arg("*"_L1);
+    const QString libPattern = QString("lib"_L1 + libPrefix).arg(langCode).arg("*"_L1);
     for (const auto &path : ldPaths) {
         QDir dir(path);
         if (!dir.isReadable() || dir.isEmpty())
@@ -473,7 +473,7 @@ bool QTextToSpeechProcessorFlite::checkVoice(int voiceId)
 
     setError(QTextToSpeech::ErrorReason::Configuration,
              QCoreApplication::translate("QTextToSpeech", "Invalid voiceId %1.").arg(voiceId));
-    return false;;
+    return false;
 }
 
 // Wrap QAudioSink::state and compensate early idle bug
