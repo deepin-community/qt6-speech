@@ -78,6 +78,7 @@ Architecture: any
 Multi-Arch: same
 Depends: libqt6texttospeech6 (= ${binary:Version}),
          qt6-base-dev,
+         qt6-multimedia-dev,
          ${misc:Depends},
 Description: Qt 6 Speech library - development files
  Qt is a cross-platform C++ application framework. Qt's primary feature
